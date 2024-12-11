@@ -160,7 +160,7 @@
             <div class="form-group">
                 <label for="on_prem_cost_per_dev">On-Prem Workstation Cost/user</label>
                 <span id="on_prem_cost_per_dev_value">$6500</span>
-                <input type="range" id="on_prem_cost_per_dev" name="on_prem_cost_per_dev" class="accent" min="2000" max="12000" step="100" value="6500">
+                <input type="range" id="on_prem_cost_per_dev" name="on_prem_cost_per_dev" class="accent" min="2000" max="75000" step="100" value="6500">
             </div>
     
             <!-- On-Prem Annual Infrastructure Costs -->
@@ -225,7 +225,45 @@
         <div style="max-width: 630px; margin: 10px auto; font-size: 10px; color: #6a6a6a; text-align: left; line-height: 12px;">
             <p>The cost estimates provided by this calculator are based on publicly available data and are intended for informational purposes only. Actual costs may vary depending on bespoke configurations and additional partnership discounts. Please contact us at <a href="mailto:ignite@sparkcloud.studio" style="color: #555; text-decoration: underline;">ignite@sparkcloud.studio</a> for pricing tailored to your specific needs. </p>
         </div>
-    
+        <script>
+            const machineCosts = {
+                "Starter Kit 1 | 4 Cores | 16GB RAM | NVIDIA T4 16 GB VRAM": 3000,
+                "Starter Kit 2 | 4 Cores | 16GB RAM | NVIDIA A10 24 GB VRAM": 4000,
+                "Mid-tier 1 | 8 Cores | 32GB RAM | NVIDIA T4 16 GB VRAM": 5000,
+                "Mid-tier 2 | 8 Cores | 32GB RAM | NVIDIA A10 24 GB VRAM": 6000,
+                "High-end Studio 1 | 16 Cores | 64GB RAM | NVIDIA T4 16 GB VRAM": 7000,
+                "High-end Studio 2 | 16 Cores | 64GB RAM | NVIDIA A10 24 GB VRAM": 8000,
+                "Top-tier 1 | 32 Cores | 128GB RAM | NVIDIA T4 16 GB VRAM": 10000,
+                "Top-tier 2 | 64 Cores | 256GB RAM | NVIDIA T4 16 GB VRAM": 15000,
+                "Top-tier 3 | 32 Cores | 128GB RAM | NVIDIA A10 24 GB VRAM": 12000,
+                "Exceptional Power 1 | 48 Cores | 192GB RAM | 4 x NVIDIA T4 16 GB VRAM": 20000,
+                "Exceptional Power 3 | 64 Cores | 256GB RAM | NVIDIA A10 24 GB VRAM": 22000,
+                "Exceptional Power 2 | 96 Cores | 384GB RAM | 8 x NVIDIA T4 16 GB VRAM": 30000,
+                "Exceptional Power 4 | 48 Cores | 192GB RAM | 4 x NVIDIA A10 24 GB VRAM": 25000,
+                "Exceptional Power 5 | 96 Cores | 384GB RAM | 4 x NVIDIA A10 24 GB VRAM": 32000,
+                "Insanity | 192 Cores | 768GB RAM | 8 x NVIDIA A10 24 GB VRAM": 60000
+            };
+        
+            // Update On-Prem Cost slider based on Spark ProStation selection
+            document.getElementById('spark_prostation').addEventListener('change', function () {
+                const selectedMachine = this.value;
+                const cost = machineCosts[selectedMachine];
+        
+                if (cost) {
+                    // Update the slider
+                    const costSlider = document.getElementById('on_prem_cost_per_dev');
+                    costSlider.value = cost;
+        
+                    // Update the displayed cost
+                    const costDisplay = document.getElementById('on_prem_cost_per_dev_value');
+                    costDisplay.textContent = `$${cost}`;
+        
+                    // Trigger recalculation
+                    calculateAndUpdate();
+                }
+            });
+        </script>
+        
         <script>
             const formatCurrency = (amount) => Number(amount).toLocaleString(undefined, { minimumFractionDigits: 2 });
     
