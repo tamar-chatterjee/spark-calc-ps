@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 # Hardcoded machine cost options for the dropdown
 machine_options = {
-    "Starter Kit 1 | 4 Cores | 16GB RAM | NVIDIA T4 16 GB VRAM": 0.99,
+    "Starter Kit 100 | 4 Cores | 16GB RAM | NVIDIA T4 16 GB VRAM": 0.99,
     "Starter Kit 2 | 4 Cores | 16GB RAM | NVIDIA A10 24 GB VRAM": 1.65,
     "Mid-tier 1 | 8 Cores | 32GB RAM | NVIDIA T4 16 GB VRAM": 1.99,
     "Mid-tier 2 | 8 Cores | 32GB RAM | NVIDIA A10 24 GB VRAM": 2.29,
